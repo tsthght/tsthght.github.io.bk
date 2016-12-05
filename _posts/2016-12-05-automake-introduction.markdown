@@ -15,7 +15,8 @@ categories: automake, autoconf, makefile
 
 # 举例hellworld    
 
-1. 创建一个示例程序: helloworld    
+1. 创建一个示例程序: helloworld      
+
 > mkdir hellowrld    
 > cd helloworld    
 
@@ -28,6 +29,7 @@ int main(int argc, char **argv) {
 ```
 
 2. 生成config   
+
 > autoscan    
 > mv configure.scan configure.ac    
 
@@ -46,6 +48,7 @@ AC_OUTPUT(Makefile)
     通过上述命令，分别阐述了:aclocal.m4和configure
 
 3. 新建Makefile.am   
+
 > touch Makefile.am   
 
     内容如下：        
@@ -57,12 +60,15 @@ helloworld_SOURCES=helloworld.c
 ```
 
 4. 运行automake     
+
 > automake --add-missing    
 
 5. 执行configure生成Makefile   
+
 > ./configure   
 
 # 生成的Makefile中预定义操作    
+
 > make    
 > make clean    
 > make install   
