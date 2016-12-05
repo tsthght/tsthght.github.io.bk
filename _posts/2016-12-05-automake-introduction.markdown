@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "automake autoconf 入门教程"
-date:   2016-12-03 22:00:24 +0800
+date:   2016-12-05 17:55:24 +0800
 categories: automake, autoconf, makefile
 ---
 # Makefile介绍    
