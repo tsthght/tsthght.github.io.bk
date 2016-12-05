@@ -10,12 +10,13 @@ categories: automake, autoconf, makefile
 3. 使用automake时，程序开发人员只需要写一些简单的含有预定义的宏文件   
 
 # 环境配置   
-1. yum install automake    
-2. yum install autoconf   
+
+> yum install automake    
+> yum install autoconf   
 
 # 举例hellworld    
 
-1. 创建一个示例程序: helloworld      
+- 创建一个示例程序: helloworld      
 
 > mkdir hellowrld    
 > cd helloworld    
@@ -28,7 +29,7 @@ int main(int argc, char **argv) {
 }    
 ```
 
-2. 生成config   
+- 生成config   
 
 > autoscan    
 > mv configure.scan configure.ac    
@@ -47,7 +48,7 @@ AC_OUTPUT(Makefile)
 
     通过上述命令，分别阐述了:aclocal.m4和configure
 
-3. 新建Makefile.am   
+- 新建Makefile.am   
 
 > touch Makefile.am   
 
@@ -59,11 +60,11 @@ bin_PROGRAMS=hellowrld
 helloworld_SOURCES=helloworld.c   
 ```
 
-4. 运行automake     
+- 运行automake     
 
 > automake --add-missing    
 
-5. 执行configure生成Makefile   
+- 执行configure生成Makefile   
 
 > ./configure   
 
