@@ -53,7 +53,7 @@ bin_PROGRAMS=hellowrld
 helloworld_SOURCES=helloworld.c   
 ```
 
-4. 运行automake    
+4. 运行automake     
 > automake --add-missing    
 
 5. 执行configure生成Makefile   
