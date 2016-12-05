@@ -31,13 +31,15 @@ int main(int argc, char **argv) {
 > autoscan    
 > mv configure.scan configure.ac    
 
-    修改configure.ac中的内容:
+    修改configure.ac中的内容:     
+
 ```   
 AC_INIT(helloworld.c)
 AM_INIT_AUTOMAKE(helloworld, 1.0)    
 AC_PROG_CC    
 AC_OUTPUT(Makefile)   
-```
+```      
+
 > aclocal    
 > autoconf   
 
@@ -46,7 +48,8 @@ AC_OUTPUT(Makefile)
 3. 新建Makefile.am   
 > touch Makefile.am   
 
-    内容如下：   
+    内容如下：        
+
 ```     
 AUTOMAKE_OPTIONS=foreign    
 bin_PROGRAMS=hellowrld   
