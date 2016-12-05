@@ -46,9 +46,11 @@ SUBDIRS=lib src                          #指示所有的子Makefile.am所在的
 CURRENTPATH=$(shell /bin/pwd)            #指示当前路径     
 INCLUDES=-l$(CURRENTPATH)/include        #指示src中头文件之外的其他头文件的目录，需要EXPORT到子Makefile.am中去     
 export INCLUDES    
+
 #生成lib需要的一些配置
 noinst_LIBRARIES=libnew.a                #noinst:not install      
 libnew_a_SOURCES=new.c                   #注意.换成_     
+
 #成成可执行文件需要的一些配置     
 bin_PROGRAMS=main        
 main_SOURCES=main.h main.c              
