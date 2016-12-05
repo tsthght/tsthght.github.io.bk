@@ -10,7 +10,7 @@ AC_PREREQ(2.5.9)                        #工具版本号，不需要关系
 AC_INIT(atlas, 1.0, tsthght@163.com)    #指示：可执行名称+版本号+BUG-REPORT     
 AC_CONFIG_SRCDIR([src/main.c])          #检验源文件是否缺失     
 
-AM_CONFIG_HEADER(config.h)              #     
+AM_CONFIG_HEADER(config.h)              #如果config.h没有，不需要对其进行检查     
 AM_INIT_AUTOMAKE(atlas, 1.0, tsthght@163.com) #可选     
 
 #checks for programs     
