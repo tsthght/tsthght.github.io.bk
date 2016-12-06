@@ -1,0 +1,41 @@
+---
+layout: book
+title: 2016年12月书单
+category: 读书
+tags: 书单
+keywords: 阅读,书单,2016
+books: 
+    - title: Git Pro
+      status: 在读
+      author: Scott Chacon / Ben Straub
+      publisher: Appress
+      language: Chinese
+      link: https://www.gitbook.com/book/bingohuang/progit2/details
+      cover: https://img5.doubanio.com/lpic/s4245786.jpg
+      description: Git入门书籍
+      notes: 
+    - title: GoF 23种设计模式解析附C++实现源码
+      status: 在读  
+      author: k_echel
+      publisher: 
+      language: Chinese
+      link: 
+      cover: /public/img/default-cover.jpg
+      description: 国人Gof23的理解
+    - title: Maximum RPM
+      status: 未读
+      author: Edward C Bailey
+      publisher: Red Hat 
+      language: English
+      link: http://rpm5.org/docs/max-rpm.html
+      cover: /public/img/default-cover.jpg
+      description: 学习构建RPM包时发现的，RPM权威书籍  
+    - title: Git 权威指南
+      status: 未读
+      author: 蒋鑫
+      publisher: 机械工业出版社华章公司
+      language: Chinese
+      link: https://book.douban.com/subject/6526452/
+      cover: https://img3.doubanio.com/lpic/s6523000.jpg
+      description: Git 的百科全书
+---

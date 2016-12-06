@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>首页 | Tsthght的博客</title>
+<title>使用Jekyll搭建个人博客 | Tsthght的博客</title>
 <meta name="author" content="紫气东来">
+
+  <meta name="keywords" content="jekyll, blogs">
 
 
 <link rel="shortcut icon" href="" />
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="/public/js/prettify/prettify.css">
 <link rel="stylesheet" href="/public/css/base.css">
 <link href="/pages/atom.xml" rel="alternate" title="Tsthght的博客" type="application/atom+xml">
+
 </head>
 <body>
   <div class="container">
@@ -195,59 +198,38 @@
             <div class="row">
   <div class="col-md-13 aside3-title">
     <br>
-    <h2 id="#identifier"><i class="fa fa-home fa-lg"></i></h2>
+    <h2 id="#identifier">使用Jekyll搭建个人博客</h2>
+    2016年12月03日
   </div>
   <div class="col-md-13 aside3-content">
-    <div id="page-content">
-      <!--<br>--> 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">最新文章</div>
-      
-    </div>
-  </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Optimization</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">LaTeX</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-</div>
- 
+    <hr>
+    <div id="content">
+      <h1>Jekyll环境的搭建</h1>
+
+<ol>
+<li>sudo gem update -system<br></li>
+<li>sudo gem install jekyll<br></li>
+</ol>
+
+<h1>搭建个人博客</h1>
+
+<ol>
+<li>mkdir jekyll_demo<br></li>
+<li>cd jekyll_demo<br></li>
+<li>git init<br></li>
+<li>git checkout --orphan gh-pages<br></li>
+</ol>
+
+<h1>发布博文</h1>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<h1>参考</h1>
+
+<p>[1] <a href="https://segmentfault.com/a/1190000000406013">使用Jekyll在Github上搭建个人博客</a>     </p>
 
     </div>
     <hr>
@@ -258,7 +240,14 @@
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

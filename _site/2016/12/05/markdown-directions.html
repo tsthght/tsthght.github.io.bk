@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>首页 | Tsthght的博客</title>
+<title>Markdown 语法学习 | Tsthght的博客</title>
 <meta name="author" content="紫气东来">
+
+  <meta name="keywords" content="markdown">
 
 
 <link rel="shortcut icon" href="" />
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="/public/js/prettify/prettify.css">
 <link rel="stylesheet" href="/public/css/base.css">
 <link href="/pages/atom.xml" rel="alternate" title="Tsthght的博客" type="application/atom+xml">
+
 </head>
 <body>
   <div class="container">
@@ -195,59 +198,94 @@
             <div class="row">
   <div class="col-md-13 aside3-title">
     <br>
-    <h2 id="#identifier"><i class="fa fa-home fa-lg"></i></h2>
+    <h2 id="#identifier">Markdown 语法学习</h2>
+    2016年12月05日
   </div>
   <div class="col-md-13 aside3-content">
-    <div id="page-content">
-      <!--<br>--> 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">最新文章</div>
-      
-    </div>
-  </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Optimization</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">LaTeX</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-</div>
- 
+    <hr>
+    <div id="content">
+      <p><img src="/images/markdown-logo.png" alt="image01">   </p>
+
+<h1>标题</h1>
+
+<p>在标题前面添加‘#’号，几级标题就添加几个&#39;#&#39;号   </p>
+
+<blockquote>
+<h1>一级标题</h1>
+
+<h2>二级标题</h2>
+
+<h3>三级标题</h3>
+</blockquote>
+
+<h1>列表</h1>
+
+<p>列表分为：有序列表和无序列表，无序列表前加&#39;-&#39;，有序列表前加数字   </p>
+
+<blockquote>
+<ol>
+<li>第一行<br></li>
+<li>第二行<br></li>
+<li>第三行<br></li>
+</ol>
+
+<p>- 文本1<br>
+- 文本2<br>
+- 文本3   </p>
+</blockquote>
+
+<h1>链接和图片</h1>
+
+<blockquote>
+<p>[显示的文本](url)<br>
+![  ](url)   </p>
+</blockquote>
+
+<h1>引用</h1>
+
+<p>在待引用的文本前加&#39;&gt;&#39;即可   </p>
+
+<blockquote>
+<p>&gt; 引用内容   </p>
+</blockquote>
+
+<h1>粗体与斜体</h1>
+
+<p>使用一个*包含的一段文本为<em>斜体</em>， 使用两个**包含的一段文本为<strong>粗体</strong>   </p>
+
+<blockquote>
+<p>*斜体*<br>
+**粗体**   </p>
+</blockquote>
+
+<h1>代码引用</h1>
+
+<p>引用代码时，使用`将语句抱起来，如果多行，可将```置于代码的首行和末行   </p>
+
+<blockquote>
+<p>`hello world`<br>
+```<br>
+`hello markdown`   </p>
+</blockquote>
+
+<h1>表格</h1>
+
+<blockquote>
+<p>|col1   |col2  |col3  |   </p>
+</blockquote>
+
+<h1>转义</h1>
+
+<blockquote>
+<p>使用\进行转义  </p>
+</blockquote>
+
+<h1>参考</h1>
+
+<blockquote>
+<p>[1] <a href="http://www.jianshu.com/p/q81RER/">献给写作者的Markdown新手指南</a><br>
+[2] <a href="http://wowubuntu.com/markdown/">markdown语法说明-简体中文版</a>   </p>
+</blockquote>
 
     </div>
     <hr>
@@ -258,7 +296,14 @@
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

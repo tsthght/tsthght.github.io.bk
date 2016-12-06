@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>首页 | Tsthght的博客</title>
+<title>automake autoconf 入门教程 | Tsthght的博客</title>
 <meta name="author" content="紫气东来">
+
+  <meta name="keywords" content="automake, autoconf, makefile">
 
 
 <link rel="shortcut icon" href="" />
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="/public/js/prettify/prettify.css">
 <link rel="stylesheet" href="/public/css/base.css">
 <link href="/pages/atom.xml" rel="alternate" title="Tsthght的博客" type="application/atom+xml">
+
 </head>
 <body>
   <div class="container">
@@ -195,59 +198,104 @@
             <div class="row">
   <div class="col-md-13 aside3-title">
     <br>
-    <h2 id="#identifier"><i class="fa fa-home fa-lg"></i></h2>
+    <h2 id="#identifier">automake autoconf 入门教程</h2>
+    2016年12月05日
   </div>
   <div class="col-md-13 aside3-content">
-    <div id="page-content">
-      <!--<br>--> 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">最新文章</div>
-      
-    </div>
-  </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Optimization</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">LaTeX</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-</div>
- 
+    <hr>
+    <div id="content">
+      <h1>Makefile介绍</h1>
+
+<ol>
+<li>Makefile让编译器知道编译一个文件所需依赖的其他的文件，当这些依赖文件有变化时，编译器会自动的发现最终的生成文件已经过时，而仅仅重新编译过时的模块<br></li>
+<li>自己写的Makefile不一定符合惯例，且会和开发环境重度耦合，automake解决了手工书写Makefile的诸多问题<br></li>
+<li>使用automake时，程序开发人员只需要写一些简单的含有预定义的宏文件<br></li>
+</ol>
+
+<h1>环境配置</h1>
+
+<blockquote>
+<p>yum install automake<br>
+yum install autoconf   </p>
+</blockquote>
+
+<h1>举例hellworld</h1>
+
+<ul>
+<li>创建一个示例程序: helloworld<br></li>
+</ul>
+
+<blockquote>
+<p>mkdir hellowrld<br>
+cd helloworld    </p>
+</blockquote>
+<div class="highlight"><pre><code class="language-" data-lang="">#include &lt;stdio.h&gt;
+int main(int argc, char **argv) {     
+    printf("%s", "hello, linux world!\n");     
+    return 0;
+}    
+</code></pre></div>
+<ul>
+<li>生成config<br></li>
+</ul>
+
+<blockquote>
+<p>autoscan<br>
+mv configure.scan configure.ac    </p>
+</blockquote>
+<div class="highlight"><pre><code class="language-" data-lang="">修改configure.ac中的内容:     
+</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">AC_INIT(helloworld.c)
+AM_INIT_AUTOMAKE(helloworld, 1.0)    
+AC_PROG_CC    
+AC_OUTPUT(Makefile)   
+</code></pre></div>
+<blockquote>
+<p>aclocal<br>
+autoconf   </p>
+</blockquote>
+<div class="highlight"><pre><code class="language-" data-lang="">通过上述命令，分别阐述了:aclocal.m4和configure
+</code></pre></div>
+<ul>
+<li>新建Makefile.am<br></li>
+</ul>
+
+<blockquote>
+<p>touch Makefile.am   </p>
+</blockquote>
+<div class="highlight"><pre><code class="language-" data-lang="">内容如下：        
+</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">AUTOMAKE_OPTIONS=foreign    
+bin_PROGRAMS=hellowrld   
+helloworld_SOURCES=helloworld.c   
+</code></pre></div>
+<ul>
+<li>运行automake<br></li>
+</ul>
+
+<blockquote>
+<p>automake --add-missing    </p>
+</blockquote>
+
+<ul>
+<li>执行configure生成Makefile<br></li>
+</ul>
+
+<blockquote>
+<p>./configure   </p>
+</blockquote>
+
+<h1>生成的Makefile中预定义操作</h1>
+
+<blockquote>
+<p>make<br>
+make clean<br>
+make install<br>
+make dist<br>
+make distcheck   </p>
+</blockquote>
+
+<h1>参考</h1>
+
+<p>[1] <a href="http://www.laruence.com/2009/11/18/1154.html">automake,autoconf使用详解</a>   </p>
 
     </div>
     <hr>
@@ -258,7 +306,14 @@
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

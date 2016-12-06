@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>首页 | Tsthght的博客</title>
+<title>automake常用的宏的介绍 | Tsthght的博客</title>
 <meta name="author" content="紫气东来">
+
+  <meta name="keywords" content="automake, autoconf, makefile">
 
 
 <link rel="shortcut icon" href="" />
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="/public/js/prettify/prettify.css">
 <link rel="stylesheet" href="/public/css/base.css">
 <link href="/pages/atom.xml" rel="alternate" title="Tsthght的博客" type="application/atom+xml">
+
 </head>
 <body>
   <div class="container">
@@ -195,59 +198,76 @@
             <div class="row">
   <div class="col-md-13 aside3-title">
     <br>
-    <h2 id="#identifier"><i class="fa fa-home fa-lg"></i></h2>
+    <h2 id="#identifier">automake常用的宏的介绍</h2>
+    2016年12月05日
   </div>
   <div class="col-md-13 aside3-content">
-    <div id="page-content">
-      <!--<br>--> 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">最新文章</div>
-      
-    </div>
-  </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Optimization</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">LaTeX</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-</div>
- 
+    <hr>
+    <div id="content">
+      <h1>configure.ac 中的一些配置</h1>
+
+<p>AC<em>PREREQ(2.5.9)                        #工具版本号，不需要关系<br>
+AC</em>INIT(atlas, 1.0, tsthght@163.com)    #指示：可执行名称+版本号+BUG-REPORT<br>
+AC<em>CONFIG</em>SRCDIR([src/main.c])          #检验源文件是否缺失     </p>
+
+<p>AM<em>CONFIG</em>HEADER(config.h)              #如果config.h没有，不需要对其进行检查<br>
+AM<em>INIT</em>AUTOMAKE(atlas, 1.0, tsthght@163.com) #可选     </p>
+
+<h1>checks for programs</h1>
+
+<p>AC<em>PROG</em>CC                              #检查cc，如果c++则AC<em>PROG</em>CXX    </p>
+
+<h1>checks for libraies</h1>
+
+<p>AC<em>CHECK</em>LIB([lib], [func], [if<em>exist</em>action], [not<em>exist</em>action]) #检查库, 例如：AC<em>CHECK</em>LIB([m], [sqrt])     </p>
+
+<p>AC<em>PROG</em>RANLIB                         #使用静态库时，需要<br>
+AC<em>PROG</em>LIBTOOL                        #使用动态库时，需要    </p>
+
+<h1>checks for header files</h1>
+
+<p>AC<em>CHECK</em>HEADERS([float.h malloc.h stdlib.h])     </p>
+
+<h1>checks for typedefs, structures, and compiler characteristics</h1>
+
+<h1>AC<em>C</em>CONST</h1>
+
+<h1>checks for libray functions</h1>
+
+<h1>AC<em>FUNC</em>MALLOC</h1>
+
+<p>AC<em>CHECK</em>FUNCS([pow sqrt])     </p>
+
+<h1>输出的文件，有几个Makefile.am就有几个Makefile</h1>
+
+<p>AC_OUTPUT([<br>
+    Makefile<br>
+    src/Makefile<br>
+    lib/Makefile<br>
+])     </p>
+
+<h1>Makefile.am中的一些配置</h1>
+
+<p>AUTOMAKE_OPTIONS=foreign<br>
+SUBDIRS=lib src                          #指示所有的子Makefile.am所在的目录<br>
+CURRENTPATH=$(shell /bin/pwd)            #指示当前路径<br>
+INCLUDES=-l$(CURRENTPATH)/include        #指示src中头文件之外的其他头文件的目录，需要EXPORT到子Makefile.am中去<br>
+export INCLUDES    </p>
+
+<h1>生成lib需要的一些配置</h1>
+
+<p>noinst<em>LIBRARIES=libnew.a                #noinst:not install<br>
+libnew</em>a<em>SOURCES=new.c                   #注意.换成</em>     </p>
+
+<h1>成成可执行文件需要的一些配置</h1>
+
+<p>bin<em>PROGRAMS=main<br>
+main</em>SOURCES=main.h main.c<br>
+main<em>LDADD=$(top</em>srcdir)/lib/libnew.a      </p>
+
+<h1>参考</h1>
+
+<p>[1] <a href="http://blog.csdn.net/shanshanpt/article/details/17200035">Makefile实际用例分析</a>    </p>
 
     </div>
     <hr>
@@ -258,7 +278,14 @@
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

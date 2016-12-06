@@ -1,32 +1,35 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+permalink: /:year/:month/:day/:title.html
+paginate: 10
+markdown: redcarpet
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: 紫气东来的博客
-email: tsthght@163.com
-description: > # this means to ignore newlines until "baseurl:"
-  天覆地载 紫气东来
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: tsthght
-github_username:  tsthght
+# 作者信息
+author: 
+  name: 紫气东来
+  email: tsthght@163.com
+  link: 
+  weibo: 
+  github: http://github.com/tsthght
 
-# Build settings
-markdown: kramdown
-theme: minima
-gems:
-  - jekyll-feed
-exclude:
-  - Gemfile
-  - Gemfile.lock
+# 站点信息
+title: Tsthght的博客
+description: My personal blog
+rss_url: /pages/atom.xml
+
+# disqus 设置
+disqus:
+  shortname: tsthght
+
+# 主题设置，自动激活某个标签
+active: 读书
+
+# 首页除了最新文章外显示分类
+cates: 
+  - Optimization
+  - LaTeX
+
+# 中文本地化
+locals:
+  tags: 标签
+  about: 关于
+  newest: 最新文章
+  archive: 归档

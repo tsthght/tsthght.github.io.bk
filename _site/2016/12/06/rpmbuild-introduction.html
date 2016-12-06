@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>首页 | Tsthght的博客</title>
+<title>如何制作RPM包 | Tsthght的博客</title>
 <meta name="author" content="紫气东来">
+
+  <meta name="keywords" content="rpmbuild, RPM">
 
 
 <link rel="shortcut icon" href="" />
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="/public/js/prettify/prettify.css">
 <link rel="stylesheet" href="/public/css/base.css">
 <link href="/pages/atom.xml" rel="alternate" title="Tsthght的博客" type="application/atom+xml">
+
 </head>
 <body>
   <div class="container">
@@ -195,59 +198,63 @@
             <div class="row">
   <div class="col-md-13 aside3-title">
     <br>
-    <h2 id="#identifier"><i class="fa fa-home fa-lg"></i></h2>
+    <h2 id="#identifier">如何制作RPM包</h2>
+    2016年12月06日
   </div>
   <div class="col-md-13 aside3-content">
-    <div id="page-content">
-      <!--<br>--> 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">最新文章</div>
-      
-    </div>
-  </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Optimization</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">LaTeX</div>
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-         
-          
-        
-      </div>
-    </div>
-  
-</div>
- 
+    <hr>
+    <div id="content">
+      <h1>简介</h1>
+
+<p>RPM也是一个递归缩写（RPM Package Manager），类似众所周知的还有：PNG（PNG&#39;s not GIF）、GNU（GNU&#39;s not Unix）。之前是RedHat的软件包管理，开源后被移植到SunOS/Solaris/AIX/Irix等UNIX-LIKE系统之上，其遵循GPL协议。<br>
+RPM包中除了程序运行时所需的文件，也包括其他文件：保证其正常的附加文件和特定版本文件（软件包依赖关系），其可以使用户以binary形式安装软件包，并且替用户检查相关的库文件。      </p>
+
+<h1>类型</h1>
+
+<p>二进制类包：包括RPM安装包和调试信息包<br>
+源码类包：源码包和开发包     </p>
+
+<h1>制作过程</h1>
+
+<ul>
+<li>创建目录结构<br>
+&gt; yum install rpmdevtools<br>
+&gt; rpmdev -setuptree<br></li>
+</ul>
+
+<p>上述命令会在当前用户主目录下创建RPM构建的根目录结构, 如果需要改变默认位置，可以修改配置文件: ~/.rpmmacros 中的变量_topdir。目录结构如下:                 </p>
+
+<blockquote>
+<p>.<br>
+|<strong>BUILD(打包过程的工作目录)<br>
+|</strong>RPMS(存放生成的二进制包，不同硬件平台存放在不同的文件夹下)<br>
+|<strong>SOURCES(存放打包资源，包括源码打包文件和补丁文件)<br>
+|</strong>SPECS(存放SPECS文档)<br>
+|__SRPMS(存放生成的源码包)     </p>
+</blockquote>
+
+<ul>
+<li>撰写SPECS文档<br></li>
+<li>放置源代码<br></li>
+<li>构建RPM包<br>
+&gt; cd ~/rpmbuild<br>
+&gt; rpmbuild -ba SPECS/xxx.spec<br></li>
+</ul>
+
+<h1>错误与解决办法</h1>
+
+<ol>
+<li>error: Installed(but unpackaged)files(s) found<br>
+找到/usr/lib/rpm/macros中<br>
+%_<em>check</em>files     /usr/lib/rpm/check-files %{buildroot}   注释掉<br></li>
+</ol>
+
+<h1>参考</h1>
+
+<p>[1] <a href="http://www.cnblogs.com/wonderow/archive/2005/07/09/189523.html">有趣的递归缩写</a><br>
+[2] <a href="https://segmentfault.com/a/1190000002539129">制作RPM包</a><br>
+[3] <a href="http://blog.sina.com.cn/s/blog_467eb8ca010008p3.html">中间遇到了 error: Installed (but unpackaged) file(s) found: 解决的办法是</a><br>
+[4] <a href="http://blog.sina.com.cn/s/blog_467eb8ca010008p0.html">制作rpm包： error: Installed (but unpackaged) file(s) found</a>     </p>
 
     </div>
     <hr>
@@ -258,7 +265,14 @@
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>
