@@ -9,8 +9,10 @@ categories: blogs
 2. sudo gem install jekyll     
 
 # 搭建个人博客
-1. 
-2. 
+1. mkdir jekyll_demo    
+2. cd jekyll_demo     
+3. git init    
+4. git checkout --orphan gh-pages   
  
 # 发布博文
 1. 
