@@ -7,7 +7,7 @@ tags:   markdown
 keywords: markdown
 description: 
 ---
-![image01](/images/markdown-logo.png)   
+![image01](/public/img/markdown-logo.jpg)   
 
 # 标题   
 在标题前面添加‘#’号，几级标题就添加几个'#'号   

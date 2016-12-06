@@ -29,4 +29,7 @@
 *.app
 
 # ignore folders 
-./_site/*
+_site/*
+
+# ignore *.html
+*.html
