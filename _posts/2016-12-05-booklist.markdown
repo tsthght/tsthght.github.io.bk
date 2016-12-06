@@ -11,4 +11,5 @@ categories: book list
 
 # 候选读物     
 1. [Git权威指南]()    
+2. [Maximum RPM中文版](https://my.oschina.net/u/239849/blog/64030)    
 
