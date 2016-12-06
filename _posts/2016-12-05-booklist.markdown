@@ -6,7 +6,7 @@ categories: book list
 ---
 # 12月份书单   
 1. [《Git Pro》](https://www.gitbook.com/book/bingohuang/progit2/details)         
-2. [《c++设计模式》]()     
+2. [《设计模式精解》]()     
 
 
 # 候选读物     
