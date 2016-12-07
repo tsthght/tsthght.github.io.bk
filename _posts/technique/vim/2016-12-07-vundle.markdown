@@ -1,0 +1,70 @@
+---
+layout: post
+title: Vim插件管理器 
+date: 2016-12-07 11:47:31 +0800
+category: 技术
+tags:   vim Vundle
+keywords: vim Vundle
+description: 
+---
+# 简介       
+Vundle是Vim的插件管理器， 官方地址是：[Vundle](https://github.com/VundleVim/Vundle.vim)    
+
+# 安装    
+- step1: 下载并安装Vundle    
+> git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim     
+
+- step2: 配置Vundle    
+编辑Vim的配置文件~/.vimrc，将下面这段文本复制到配置文件中去（文本内容基于官网进行了裁剪）。 
+> sudo vim .vimrc    
+
+```
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" 启用vundle来管理vim插件
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" 安装插件写在这之后
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" 安装插件写在这之前
+call vundle#end()            " required
+filetype plugin on    " required
+
+" 常用命令
+" :PluginList       - 查看已经安装的插件
+" :PluginInstall    - 安装插件
+" :PluginUpdate     - 更新插件
+" :PluginSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
+" :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
+
+" h: vundle         - 获取帮助
+
+" vundle的配置到此结束，下面是你自己的配置
+
+文／许宏川（简书作者）
+原文链接：http://www.jianshu.com/p/8d416ac4ad11
+著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。
+```
+:wq保存vimrc，然后打开Vim     
+> sudo vim        
+
+软后安装插件      
+> :PluginInstall      
+
+等待插件安装完毕即可，安装成功后，左下角会显示: Done!   
+
+# 新插件的安装     
+例如安装为Markdown生成TOC的Vim插件     
+在vimrc中添加如下内容: 
+> Plugin 'mzlogin/vim-markdown-toc'     
+> :PluginInstall    
+
+
+
+# 参考    
+[1] [使用Vim插件管理器Vundle](http://www.jianshu.com/p/8d416ac4ad11)      
+
