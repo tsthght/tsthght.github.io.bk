@@ -3,7 +3,7 @@ layout: book
 title: 2016年12月书单
 category: 读书
 tags: 书单
-keywords: 阅读,书单,2016
+keywords: 阅读 书单 2016
 books: 
     - title: Git Pro
       status: 在读
@@ -22,6 +22,14 @@ books:
       link: 
       cover: /public/img/default-cover.jpg
       description: 国人Gof23的理解
+    - title: Linux程序设计
+      status: 在读  
+      author: Neil Matthew / Richard Stones   
+      publisher: 人民邮电出版社 
+      language: Chinese  
+      link: https://book.douban.com/subject/4831448/
+      cover: https://img3.doubanio.com/lpic/s4360010.jpg
+      description: Linux编程入门的书籍
     - title: Maximum RPM
       status: 未读
       author: Edward C Bailey

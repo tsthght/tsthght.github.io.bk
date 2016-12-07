@@ -3,8 +3,8 @@ layout: post
 title: Linux程序设计 第9章
 date: 2016-12-07 08:36:11 +0800
 category: 笔记
-tags: notes, rpm
-keywords: notes, rpm
+tags: notes rpm
+keywords: notes rpm
 description:
 ---
 ## 9.5 发行软件     

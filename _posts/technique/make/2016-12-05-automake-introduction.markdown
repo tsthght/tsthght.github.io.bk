@@ -4,7 +4,7 @@ title:  automake autoconf 入门教程
 date:   2016-12-05 17:55:24 +0800
 category: 技术
 tags:     automake
-keywords: automake, autoconf, makefile
+keywords: automake autoconf makefile
 description: 
 ---
 # Makefile介绍    

@@ -3,8 +3,8 @@ layout: post
 title:  常见的打包解包命令
 date:   2016-12-05 21:44:24 +0800
 category: 技术
-tags:   Linux
-keywords: zip, unzip
+tags:   Linux tar
+keywords: zip unzip
 description: 
 ---
 # .tar格式   

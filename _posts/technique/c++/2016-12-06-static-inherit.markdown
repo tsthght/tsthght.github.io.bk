@@ -3,8 +3,8 @@ layout: post
 title: 类中static变量的继承
 date: 2016-12-06 23:05:31 +0800
 category: 技术
-tags:     cplusplus
-keywords: static, c++
+tags:     cplusplus static
+keywords: static c++
 description: 
 ---
 * c++中静态变量**不能被继承**       

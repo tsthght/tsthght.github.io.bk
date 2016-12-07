@@ -4,7 +4,7 @@ title: 使用Jekyll搭建个人博客
 date: 2016-12-03 22:03:11 +0800
 category: 技术 
 tags: jekyll
-keywords: jekyll, blogs
+keywords: jekyll blogs
 description: 
 ---
 # Jekyll环境的搭建

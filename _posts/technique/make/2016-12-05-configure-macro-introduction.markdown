@@ -4,7 +4,7 @@ title:  automake常用的宏的介绍
 date:   2016-12-05 19:24:24 +0800
 category: 技术
 tags:     automake
-keywords: automake, autoconf, makefile
+keywords: automake autoconf makefile
 description: 
 ---
 # configure.ac 中的一些配置     
