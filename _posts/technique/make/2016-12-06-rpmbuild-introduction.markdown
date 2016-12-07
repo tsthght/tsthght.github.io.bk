@@ -4,7 +4,7 @@ title:  如何制作RPM包
 date:   2016-12-06 14:28:49 +0800
 category: 技术
 tags:     rpmbuild
-keywords: rpmbuild, RPM
+keywords: rpmbuild, rpm
 description: 
 ---
 # 简介   
