@@ -59,7 +59,7 @@ description:
 2. 安装插件   
 > PluginInstall     
 
-使用方法也很简单，将光标移动到想插入Table of Contents的行， 然后运行下面的命令: 
+使用方法也很简单，将光标移动到想插入Table of Contents的行， 然后运行下面的命令:       
 1. :GenTocGFM    
 生成GFM连接风格的Table of Contents     
 适用于GitHub仓库里的Markdown 文件，也适用于生成GitBook的Markdown文件    
