@@ -19,6 +19,51 @@ AM_LDFLAGS=-l....
 ```
 
 # 创建静态库   
+configure.in文件中: 
+```
+AC_PROG_RANLIB
+```
+
+Makefile.am 
+```
+noinst_LIBRARIES=xxx.a
+xxx_a_SOURCES=mmm
+AUTOMAKE_OPTIONS=foreign
+```
+
+# 创建动态库 
+configure.in文件中:   
+```
+AC_PROG_LIBTOOL
+```
+
+Makefile.am
+```
+lib_LTLIBRARIES=xxx.la
+xxx_la_SOURCES=yyy
+AUTOMAKE_OPTIONS=foreign
+```
+
+执行命令: 
+```
+aclocal
+libtoolize -f -c
+autoconf
+automake --add-missing
+./configure
+make && make install
+```
+
+运行时候会报错:
+```
+error while loading shared libraries: xxx
+```
+
+解决方法:
+1. export LD_LIBRARY_PATH=
+2. 修改/etc/ld.so.conf
+> vim /etc/ld.so.conf 
+> /sbin/ldconfig
 
 
 # 参考   
