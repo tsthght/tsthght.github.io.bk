@@ -69,4 +69,5 @@ error while loading shared libraries: xxx
 # 参考   
 1. [AC_CHECK_LIB工作原理](http://blog.csdn.net/sukhoi27smk/article/details/19418421)   
 2. [使用Automake 创建和使用静态库](http://www.cnblogs.com/shenlian/archive/2011/10/21/2220367.html)
+3. [用automake制作makefile带静态库和动态库的](https://www.oschina.net/question/143474_38702)
 
