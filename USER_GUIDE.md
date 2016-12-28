@@ -1279,7 +1279,7 @@ set offline $backend_ndx;                   #设置一个backend_ndx的库的状
 ```
 
 一般使用命令：select * from backends来查看当前系统中的backends信息，其中显示的字段含义如下：   
-<table border="1" align="left" style="width : 100%;"> 
+<table border="1" align="left" > 
 <tr>
 	<th>字段名称</th>
 	<th>含义</th>
