@@ -1,78 +1,90 @@
-* [1.4 跳转测试](#1.4)
-* [1.5 测试2](#1.5)
-<!-- vim-markdown-toc Redcarpet -->
-		* [1.2.1 DBProxy简介](#1-2-1-dbproxy简介)
-		* [1.2.2 DBProxy主要特性](#1-2-2-dbproxy主要特性)
-		* [1.2.3 DBProxy发展历程](#1-2-3-dbproxy发展历程)
-	* [1.3 文档中的符号含义说明](#1-3-文档中的符号含义说明)
-	* [1.5 各发布版本信息](#1-5-各发布版本信息)
-* [2 安装与部署](#2-安装与部署)
-	* [3.1 启动](#3-1-启动)
-		* [3.1.1 脚本启动](#3-1-1-脚本启动)
-		* [3.1.2 非脚本启动](#3-1-2-非脚本启动)
-	* [3.2 DBProxy兼容的SQL语法](#3-2-dbproxy兼容的sql语法)
-		* [3.2.1 SQL语句支持限制](#3-2-1-sql语句支持限制)
-			* [3.2.1.1 不支持的语句](#3-2-1-1-不支持的语句)
-			* [3.2.1.2 for update限制](#3-2-1-2-for-update限制)
-			* [3.2.1.3 update/delete操作限制](#3-2-1-3-update-delete操作限制)
-			* [3.2.1.4 load data限制](#3-2-1-4-load-data限制)
-			* [3.2.1.5 set option限制](#3-2-1-5-set-option限制)
-		* [3.2.2 后台DB连接池带来的限制](#3-2-2-后台db连接池带来的限制)
-			* [3.2.2.1 session级系统变量限制](#3-2-2-1-session级系统变量限制)
-			* [3.2.2.2 获取上下文语句的限制](#3-2-2-2-获取上下文语句的限制)
-			* [3.2.2.3 temporary表限制](#3-2-2-3-temporary表限制)
-			* [3.2.2.4 cur/prepare功能限制](#3-2-2-4-cur-prepare功能限制)
-			* [3.2.2.5 客户端驱动有关的限制](#3-2-2-5-客户端驱动有关的限制)
-			* [3.2.2.6 连接属性设置](#3-2-2-6-连接属性设置)
-		* [3.2.3 DBProxy配置方面的限制](#3-2-3-dbproxy配置方面的限制)
-		* [3.2.4 分表的限制](#3-2-4-分表的限制)
-	* [3.3 DBProxy管理](#3-3-dbproxy管理)
-		* [3.3.1 基本操作管理](#3-3-1-基本操作管理)
-			* [3.3.1.1 启动用户设置](#3-3-1-1-启动用户设置)
-			* [3.3.1.2 平滑关闭](#3-3-1-2-平滑关闭)
-			* [3.3.1.3 服务端口的设置](#3-3-1-3-服务端口的设置)
-			* [3.3.1.4 版本查看](#3-3-1-4-版本查看)
-			* [3.3.1.5 DBProxy运行方式设置](#3-3-1-5-dbproxy运行方式设置)
-			* [3.3.1.6 DBProxy监控进程配置](#3-3-1-6-dbproxy监控进程配置)
-			* [3.3.1.7 工作线程数量设置](#3-3-1-7-工作线程数量设置)
-			* [3.3.1.8 实例名称设置](#3-3-1-8-实例名称设置)
-			* [3.3.1.9 查看启动命令行支持的命令](#3-3-1-9-查看启动命令行支持的命令)
-			* [3.3.1.10 查看admin端口支持的命令](#3-3-1-10-查看admin端口支持的命令)
-			* [3.3.1.11 参数保存](#3-3-1-11-参数保存)
-		* [3.3.2 用户管理](#3-3-2-用户管理)
-			* [3.3.2.1 admin 用户](#3-3-2-1-admin-用户)
-			* [3.3.2.2 proxy用户](#3-3-2-2-proxy用户)
-			* [3.3.2.3 monitor用户](#3-3-2-3-monitor用户)
-		* [3.3.3 连接管理](#3-3-3-连接管理)
-			* [3.3.3.1 查看当前连接](#3-3-3-1-查看当前连接)
-			* [3.3.3.2 结束连接](#3-3-3-2-结束连接)
-			* [3.3.3.3 连接相关的参数](#3-3-3-3-连接相关的参数)
-		* [3.3.4 分表管理](#3-3-4-分表管理)
-			* [3.3.4.1 分表的配置](#3-3-4-1-分表的配置)
-			* [3.3.4.2 分表限制](#3-3-4-2-分表限制)
-		* [3.3.5 backend管理](#3-3-5-backend管理)
-			* [3.3.5.1 backend的配置](#3-3-5-1-backend的配置)
-			* [3.3.5.2 backend过载保护](#3-3-5-2-backend过载保护)
-			* [3.3.5.3 backend版本配置](#3-3-5-3-backend版本配置)
-		* [3.3.6 日志管理](#3-3-6-日志管理)
-		* [3.3.7 流量管理](#3-3-7-流量管理)
-			* [3.3.7.1 SQL 过滤](#3-3-7-1-sql-过滤)
-			* [3.3.7.2 从库流量配置](#3-3-7-2-从库流量配置)
-			* [3.3.7.3 主库流量配置](#3-3-7-3-主库流量配置)
-		* [3.3.8 统计信息管理](#3-3-8-统计信息管理)
-			* [3.3.8.1 响应时间统计](#3-3-8-1-响应时间统计)
-			* [3.3.8.2 percentile](#3-3-8-2-percentile)
-		* [3.3.9 监控管理](#3-3-9-监控管理)
-			* [3.3.9.1 参数查看](#3-3-9-1-参数查看)
-			* [3.3.9.2 状态查看](#3-3-9-2-状态查看)
-			* [3.3.9.3 最近查询语句的查看](#3-3-9-3-最近查询语句的查看)
-			* [3.3.9.5 事件等待状态查看](#3-3-9-5-事件等待状态查看)
+[1 总体信息](#1)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.1 关于本手册](#1.1)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.2  DBProxy概述](#1.2)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.2.1 DBProxy简介](#1.2.1)      
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.2.2 DBProxy主要特性](#1.2.2)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.2.3 DBProxy发展历程](#1.2.3)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.3 文档中的符号含义说明](#1.3)      
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.4 约定](#1.4)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.5 各发布版本信息](#1.5)    
+[2 安装与部署](#2)    
+[3 使用教程](#3)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1 启动](#3.1)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1.1 脚本启动](#3.1.1)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1.2 非脚本启动](#3.1.2)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2 DBProxy兼容的SQL语法](#3.2)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1 SQL语句支持限制](#3.2.1)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1.1 不支持的语句](#3.2.1.1)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1.2 for update限制](#3.2.1.2)        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1.3 update/delete操作限制](#3.2.1.3)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1.4 load data限制](#3.2.1.4)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1.5 set option限制](#3.2.1.5)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2 后台DB连接池带来的限制](#3.2.2)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.1 session级系统变量限制](#3.2.2.1)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.2 获取上下文语句的限制](#3.2.2.2)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.3 temporary表限制](#3.2.2.3)   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.4 cur/prepare功能限制](#3.2.2.4)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.5 客户端驱动有关的限制](#3.2.2.5)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2.6 连接属性设置](#3.2.2.6)           
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.3 DBProxy配置方面的限制](#3.2.3)      
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.4 分表的限制](#3.2.4)        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3 DBProxy管理](#3.3)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1 基本操作管理](#3.3.1)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.1 启动用户设置](#3.3.1.1)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.2 平滑关闭](#3.3.1.2)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.3 服务端口的设置](#3.3.1.3)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.4 版本查看](#3.3.1.4)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.5 DBProxy运行方式设置](#3.3.1.5)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.6 DBProxy监控进程配置](#3.3.1.6)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.7 工作线程数量设置](#3.3.1.7)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.8 实例名称设置](#3.3.1.8)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.9 查看启动命令行支持的命令](#3.3.1.9)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.10 查看admin端口支持的命令](#3.3.1.10)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.1.11 参数保存](#3.3.1.11)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.2 用户管理](#3.3.2)        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.2.1 admin 用户](#3.3.2.1)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.2.2 proxy用户](#3.3.2.2)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.2.3 monitor用户](#3.3.2.3)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.3 连接管理](#3.3.3)          
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.3.1 查看当前连接](#3.3.3.1)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.3.2 结束连接](#3.3.3.2)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.3.3 连接相关的参数](#3.3.3.3)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.4 分表管理](#3.3.4)           
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.4.1 分表的配置](#3.3.4.1)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.4.2 分表限制](#3.3.4.2)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.5 backend管理](#3.3.5)               
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.5.1 backend的配置](#3.3.5.1)         
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.5.2 backend过载保护](#3.3.5.2)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.5.3 backend版本配置](#3.3.5.3)     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.6 日志管理](#3.3.6)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.7 流量管理](#3.3.7)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.7.1 SQL 过滤](#3.3.7.1)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.7.2 从库流量配置](#3.3.7.2)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.7.3 主库流量配置](#3.3.7.3)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.8 统计信息管理](#3.3.8)         
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.8.1 响应时间统计](#3.3.8.1)       
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.8.2 percentile](#3.3.8.2)         
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.9 监控管理](#3.3.9)         
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.9.1 参数查看](#3.3.9.1)       
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.9.2 状态查看](#3.3.9.2)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.9.3 最近查询语句的查看](#3.3.9.3)       
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.9.4 查询相应时间查看](#3.3.9.4)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3.9.5 事件等待状态查看](#3.3.9.5)    
 
-<!-- vim-markdown-toc -->
-### 1.2.1 DBProxy简介      
+# 1 总体信息
+<span id="1"></span>    
+## 1.1 关于本手册
+<span id="1.1"></span>   
+本参考手册仅针对**美团点评**内部目前使用的 DBProxy v0.2.0 版本功能和使用方法进行介绍，意在使用户更快速的掌握DBProxy v0.2.0 版本提供的各种功能，以及更便捷的针对线上使用DBProxy v0.2.0 出现的故障进行排错。    
+
+## 1.2  DBProxy概述
+<span id="1.2"></span>    
+### 1.2.1 DBProxy简介
+<span id="1.2.1"></span>      
 DBProxy是一个位于前端应用与后端MySQL数据库之间的中间件，它使得应用程序员无需再关心读写分离、分表等与MySQL相关的细节，可以专注于编写业务逻辑，同时使得DBA的运维工作对前端应用透明，上下线DB前端应用无感知。     
 
-### 1.2.2 DBProxy主要特性    
+### 1.2.2 DBProxy主要特性
+<span id="1.2.2"></span>    
 - 读写分离     
 - 负载均衡    
 - 支持分表     
@@ -82,14 +94,15 @@ DBProxy是一个位于前端应用与后端MySQL数据库之间的中间件，�
 - 从库流量配置    
 - 动态加载配置项    
 
-### 1.2.3 DBProxy发展历程    
+### 1.2.3 DBProxy发展历程 
+<span id="1.2.3"></span>   
 DBProxy 的前身是由 Qihoo 360公司Web平台部基础架构团队开发维护的一个基于MySQL协议的数据中间层项目Atlas。Atlas是在MySQL官方推出的MySQL-Proxy 0.8.2版本的基础上，修改了大量bug，添加了很多功能特性。Atlas项目在360公司内部得到了广泛应用，很多MySQL业务已经接入了Atlas平台，每天承载的读写请求数达几十亿条。
     
 美团点评 自2015年在开源Atlas版本基础上进行了开发，满足了公司内部各项业务的场景需求，最终演化成了美团点评内部使用的中间件DBProxy。
 
 ## 1.3 文档中的符号含义说明    
-
-<table border="1" align="left" style="width : 100%;">
+<span id="1.3"></span>
+<table  align="left" style="width : 100%;">
 	<tr>
 		<th>序号</th>
 		<th>符号</th>
@@ -112,15 +125,16 @@ DBProxy 的前身是由 Qihoo 360公司Web平台部基础架构团队开发维�
 	</tr>
 </table>      
 
-
-
-<h1 id="1.4">1.4 约定</h1>   
+## 1.4 约定
+<span id="1.4"></span>   
 对DBProxy的配置文件的修改，需要**重启**配置才会**生效**。    
         
-## 1.5 各发布版本信息   
+## 1.5 各发布版本信息
+<span id="1.5"></span>   
 详见[release notes](./RELEASE_NOTES.md)
          
-# 2 安装与部署           
+# 2 安装与部署
+<span id="2"></span>           
 - 安装依赖包      
 
 ```
@@ -274,9 +288,12 @@ check-state-interval=4
 check-state-conn-timeout=1
 ```
 
-<h3 id="1.5">3 使用教程</h3>      
+# 3 使用教程      
+<span id="3"></span>
 ## 3.1 启动   
+<span id="3.1"></span>
 ### 3.1.1 脚本启动    
+<span id="3.1.1"></span>
 - 修改bin/mysql-proxyd脚本    
 
 ```
@@ -290,18 +307,21 @@ $install_path/mysql-proxyd $instance_name start/restart/stop
 ```
 
 ### 3.1.2 非脚本启动     
-
+<span id="3.1.2"></span>
 ```
 $install_path/bin/mysql-proxy --default-file=$config_file_path/instance_name.cnf   #$install_path安装路径  $instance_name实例名字    
 ```
 
 ## 3.2 DBProxy兼容的SQL语法    
+<span id="3.2"></span>
 目前DBProxy兼容绝大多数MySQL语法。但是对于特殊配置、环境下的某些MySQL语法有一定的限制，限制会在本节列出。    
 
 ### 3.2.1 SQL语句支持限制      
+<span id="3.2.1"></span>
 #### 3.2.1.1 不支持的语句  
+<span id="3.2.1.1"></span>
    
-<table border="1" align="left" style="width : 100%;"> 
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>序号</th>
 	<th>不支持的语句</th>
@@ -341,23 +361,30 @@ $install_path/bin/mysql-proxy --default-file=$config_file_path/instance_name.cnf
 </table>
 
 #### 3.2.1.2 for update限制   
+<span id="3.2.1.2"></span>
 select for update 也可能会走从库，使用select for update 必须在显示事务中。    
 
 #### 3.2.1.3 update/delete操作限制    
+<span id="3.2.1.3"></span>
+
 不支持没有where条件的update ,delete操作。    
 
 #### 3.2.1.4 load data限制    
+<span id="3.2.1.4"></span>
 目前不支持load data。    
 
 #### 3.2.1.5 set option限制
+<span id="3.2.1.5"></span>
+
 connector/J 5.1.18之前的驱动会发送该类语句。
 
 ### 3.2.2 后台DB连接池带来的限制 
+<span id="3.2.2"></span>
   
 #### 3.2.2.1 session级系统变量限制     
+<span id="3.2.2.1"></span>
 
-
-<table border="1" align="left" style="width : 100%;">
+<table  align="left" style="width : 100%;">
 <tr>
 	<th>版本</th>
 	<th>限制</th>
@@ -389,12 +416,18 @@ connector/J 5.1.18之前的驱动会发送该类语句。
 
 
 #### 3.2.2.2 获取上下文语句的限制     
+<span id="3.2.2.2"></span>
+
 对于found_rows、row_count以及show warning、select last_insert_id等获取上下文信息的语句，仅在产生该类信息的语句(比如SQL_CALC_FOUND_ROWS语句、insert auto increment等)正确执行后立即执行有效，否则结果无效。    
 
 #### 3.2.2.3 temporary表限制     
+<span id="3.2.2.3"></span>
+
 temporary表的相关操作执行结果可能错误，temporary表在不同的session中查询结果不同。    
 
 #### 3.2.2.4 cur/prepare功能限制    
+<span id="3.2.2.4"></span>
+
 不支持原生的cursor、prepare等功能。    
 
 对于prepare语句的处理机制主要有以下两种:     
@@ -411,7 +444,9 @@ temporary表的相关操作执行结果可能错误，temporary表在不同的se
  &nbsp; &nbsp; &nbsp; &nbsp; - JDBC：useServerPrepStmts=false时(默认值)，采用第一种方式。
 
 #### 3.2.2.5 客户端驱动有关的限制    
-<table border="1" align="left" style="width : 100%;"> 
+<span id="3.2.2.5"></span>
+
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>序号</th>
 	<th>限制</th>
@@ -432,7 +467,9 @@ temporary表的相关操作执行结果可能错误，temporary表在不同的se
 </table>
 
 #### 3.2.2.6 连接属性设置    
-<table border="1" align="left" style="width : 100%;"> 
+<span id="3.2.2.6"></span>
+
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>版本</th>
 	<th>限制</th>
@@ -460,8 +497,9 @@ temporary表的相关操作执行结果可能错误，temporary表在不同的se
 </table>
 
 ### 3.2.3 DBProxy配置方面的限制   
+<span id="3.2.3"></span>
  
-<table border="1" align="left" style="width : 100%;"> 
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>序号</th>
 	<th>限制</th>
@@ -481,7 +519,9 @@ temporary表的相关操作执行结果可能错误，temporary表在不同的se
 </table>
 
 ### 3.2.4 分表的限制    
-<table border="1" align="left" style="width : 100%;">
+<span id="3.2.4"></span>
+
+<table  align="left" style="width : 100%;">
 <tr>
 	<th>序号</th>
 	<th>限制</th>
@@ -549,14 +589,20 @@ temporary表的相关操作执行结果可能错误，temporary表在不同的se
 </table>
 
 ## 3.3 DBProxy管理   
+<span id="3.3"></span>
+
 目前DBProxy支持对以下功能模块的管理：基本操作管理、用户管理、连接管理、分表管理、backend管理、日志管理、流量控制、统计信息管理和监控管理。下面章节便依次展开介绍各个模块的功能以及用法。    
       
 ![](./img/dbproxy-function.jpg)
 
 ### 3.3.1 基本操作管理      
+<span id="3.3.1"></span>
+
 基本操作管理主要是对DBProxy本身的一些管理，诸如：设置DBProxy启动时所属的用户、DBProxy监听的端口号、DBProxy版本信息、DBProxy平滑关闭等等信息，下面一一介绍。     
 
 #### 3.3.1.1 启动用户设置     
+<span id="3.3.1.1"></span>
+
 **功能概述**    
 以root用户启动DBProxy时，可以配置非root用户启动DBProxy；以非root用户启动DBProxy时，该参数失效。该参数生效时，DBProxy启动时所创建的文件（如日志文件、配置文件所在文件夹等）的拥有者均为所配置的用户。    
 
@@ -602,6 +648,8 @@ ps -ef | grep proxy
 ![](./img/33113.jpg)    
 
 #### 3.3.1.2 平滑关闭    
+<span id="3.3.1.2"></span>
+
 **功能概述**    
 该功能支持DBProxy立即关闭和平滑关闭。立即关闭是指立即结束DBProxy进程；平滑关闭是指若有正在执行的事务，等待shutdown-timeout时间，如果仍有执行的事务，则直接结束DBProxy进程。    
 
@@ -645,6 +693,8 @@ shutdown [NORMAL|IMMEDIATE];               #NORMAL:平滑下线    IMMEDIATE:立
 DBProxy进程会立刻被终止，退出；而同样的场景下，执行平滑关闭，则会等shutdown-timeout时间，若果在shutdown-timeout时间内，不再有事务中的连接，则DBProxy退出，如果在shutdown-timeout之后仍旧存在连接，则DBProxy进程会立即被终止。
 
 #### 3.3.1.3 服务端口的设置   
+<span id="3.3.1.3"></span>
+
 **功能概述**      
 DBProxy可以对admin和proxy所监听的端口进行设置，用户在连接admin和proxy的时候，需要指定对应的端口号。    
 
@@ -668,6 +718,8 @@ show variables like 'proxy-address';     #查看proxy端口的配置
 ![](./img/33131.jpg)    
 
 #### 3.3.1.4 版本查看    
+<span id="3.3.1.4"></span>
+
 **功能概述**    
 在DBProxy启动之前或之后，均可以查看DBProxy版本信息。    
 
@@ -693,6 +745,8 @@ select version;            #查看当前DBProxy的版本号
 ![](./img/33133.jpg)   
 
 #### 3.3.1.5 DBProxy运行方式设置    
+<span id="3.3.1.5"></span>
+
 **功能概述**     
 DBProxy本身的运行方式分为两种：1 前台运行方式 2 后台运行方式。DBProxy在配置文件中也可以对不同类型的运行方式进行配置，具体配置方法下面将进行详述。    
 
@@ -714,6 +768,8 @@ show variables like 'daemon';
 ![](./img/33151.jpg)    
 
 #### 3.3.1.6 DBProxy监控进程配置   
+<span id="3.3.1.6"></span>
+
 **功能概述**     
 为了增加DBProxy的可用性，允许在DBProxy启动的同时，另外启动一个监控进程。当DBProxy意外退出时，该监控进程会自动启动退出的DBProxy，该监控进程是否启动，也可在配置文件中进行配置。   
 
@@ -739,6 +795,8 @@ show variables like 'keepalive';
 ![](./img/33162.jpg)    
 
 ####3.3.1.7 工作线程数量设置    
+<span id="3.3.1.7"></span>
+
 **功能概述**  
 DBProxy中建立的连接请求的实际处理者均为工作线程，为了提高DBProxy的并发量，可以配置多个工作线程，工作线程的数量可以在配置文件中进行配置。    
 
@@ -760,6 +818,8 @@ show variables like 'event-threads';
 ![](./img/33171.jpg)         
 
 #### 3.3.1.8 实例名称设置    
+<span id="3.3.1.8"></span>
+
 **功能概述**    
 每个DBProxy启动时需要指定实例名称，实例名称可以在配置文件中进行配置。    
 
@@ -781,6 +841,8 @@ show variables like 'instance';
 ![](./img/33181.jpg)   
 
 #### 3.3.1.9 查看启动命令行支持的命令    
+<span id="3.3.1.9"></span>
+
 **功能概述**    
 DBProxy启动时，除了在配置文件中配置启动参数外，也可以在启动命令行对参数进行指定。可以通过启动命令行所提供的帮助命令，查看启动命令行锁支持的启动配置参数。    
 
@@ -798,6 +860,8 @@ $instance_path/bin/mysql-proxy --defaults-file=$config_file_path/config_file_nam
 ![](./img/33191.jpg)   
 
 #### 3.3.1.10 查看admin端口支持的命令   
+<span id="3.3.1.10"></span>
+
 **功能概述**    
 admin端口提供了用来查看当前admin端口所提供的所有的命令，可以通过该功能进行查看。   
 
@@ -813,6 +877,8 @@ select * from help;
 ![](./img/331101.jpg)  
 
 #### 3.3.1.11 参数保存    
+<span id="3.3.1.11"></span>
+
 **功能概述**    
 该功能允许用户对DBProxy参数的修改保存到磁盘中的配置文件中。    
 
@@ -836,11 +902,15 @@ save config;
 ![](./img/331113.jpg)   
 
 ### 3.3.2 用户管理   
+<span id="3.3.2"></span>
+
 DBProxy中的用户可以分为三类：admin用户，proxy用户和monitor用户。admin用户是用来连接DBProxy管理端口的，连接之后可以对DBProxy进行设置；proxy用户是用来连接proxy端口的，连接时候可以操纵后台数据库；monitor端口是在DBProxy系统监控各个backends所需要的用户。下面将依次展开介绍。    
 
 ![](./img/user-manager.bmp)    
 
 #### 3.3.2.1 admin 用户   
+<span id="3.3.2.1"></span>
+
 **功能概述**    
 DBProxy允许管理员对admin的用户进行配置、查看和修改，以及对IP拦截的配置，下面将依次展开介绍。   
 
@@ -863,7 +933,7 @@ select * from pwds;
 
 ![](./img/33211.jpg)   
 
-<table border="1" align="left" style="width : 100%;"> 
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>字段名称</th>
 	<th>含义</th>
@@ -1087,6 +1157,8 @@ add user backends dbproxy_test@tag_mt;
 ![](./img/332212.jpg)   
 
 #### 3.3.2.3 monitor用户   
+<span id="3.3.2.3"></span>
+
 **功能概述**    
 DBProxy允许管理员对monitor的用户进行配置和查看，下面将依次展开介绍。    
 
@@ -1112,10 +1184,13 @@ show variables like 'backend-monitor-pwds';
 ![](./img/332214.jpg)  
 
 ### 3.3.3 连接管理   
+<span id="3.3.3"></span>
 
 在DBProxy中，允许查看和设置与连接相关的信息。下面将意义叙述。    
 
 #### 3.3.3.1 查看当前连接    
+<span id="3.3.3.1"></span>
+
 **功能概述**    
 DBProxy允许管理员查看当前连接DBProxy的所有连接的信息，这其中包括对admin端口的连接和对proxy 端口的连接。    
 
@@ -1130,6 +1205,8 @@ show processlist;
 ![](./img/33311.jpg)
 
 #### 3.3.3.2 结束连接    
+<span id="3.3.3.2"></span>
+
 **功能概述**    
 该功能允许管理员通过登录admin端口，将当前执行的某个连接进行立即关闭。    
 
@@ -1143,6 +1220,8 @@ kill [connection] $connect_Id   #connect_Id = $connect_Id的连接
 通过show processlists;命令，可以获得每个连接的ID，通过连接的ID，即可对指定连接进行关闭。     
 
 #### 3.3.3.3 连接相关的参数   
+<span id="3.3.3.3"></span>
+
 **功能概述**   
 对于DBProxy来说，管理的连接主要有两类：1 客户端连接DBProxy的连接 2 DBProxy连接backend的连接。因此，对连接的设置也是针对这两类连接进行的。    
 
@@ -1169,7 +1248,11 @@ set check-state-conn-timeout=$int;
 ```
 
 ### 3.3.4 分表管理   
+<span id="3.3.4"></span>
+
 #### 3.3.4.1 分表的配置   
+<span id="3.3.4.1"></span>
+
 **功能概述**    
 目前DBProxy线上使用的版本支持分表功能，分表策略目前为：hash。分表的配置可以在配置文件中进行配置，但是在0.2版本及其后的版本支持在admin端口对分表进行动态的配置。    
 
@@ -1220,6 +1303,8 @@ remove tables like 'dbname.tbl'; #删除一列分表信息：dbname.tbl
 通过save config; 命令，可以将Admin端口修改的分表信息保存到配置文件中。   
 
 #### 3.3.4.2 分表限制   
+<span id="3.3.4.2"></span>
+
 **功能概述**    
 由于DBProxy对分表的支持力度有限，因此分表使用时有一定的限制，下面将对限制进行说明。  
 
@@ -1229,9 +1314,13 @@ remove tables like 'dbname.tbl'; #删除一列分表信息：dbname.tbl
 ![](./img/shard-limit.bmp)    
 
 ### 3.3.5 backend管理   
+<span id="3.3.5"></span>
+
 对backend的操作主要是对backend的配置以及对backend的过载保护。backend的配置主要包括对bakend信息的查看、对backend的增删改，以及对backend的属性的修改，包括backend的权重、tag、状态等信息的操作。接下来将对该部分一一详述。    
 
 #### 3.3.5.1 backend的配置    
+<span id="3.3.5.1"></span>
+
 **功能概述**    
 DBProxy启动之前需要在配置文件中配置backend信息。backend按照读写分类，可分为读写backend库(可以读写操作)和只读backend库（仅可以读操作），其中在配置文件中读写backend库是必须配置的。     
 
@@ -1273,7 +1362,7 @@ set offline $backend_ndx;                   #设置一个backend_ndx的库的状
 ```
 
 一般使用命令：select * from backends来查看当前系统中的backends信息，其中显示的字段含义如下：   
-<table align="left" style="width : 100%;"> 
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>字段名称</th>
 	<th>含义</th>
@@ -1361,6 +1450,8 @@ remove backend 命令可以动态的删除一个主库或是从库，例如删�
 ![](./img/33519.jpg)
 
 #### 3.3.5.2 backend过载保护   
+<span id="3.3.5.2"></span>
+
 **功能概述**    
 DBProxy对后端连接的backend也做了一定的保护，限定了每个backend并发的线程数量。当某个backend的并发数高于阈值，则会使当前的连接进行等待，从而对backend进行保护。涉及到的参数有以下两个，接下来将分别介绍。    
 
@@ -1436,6 +1527,8 @@ set thread-running-sleep-delay=$int;              #修改thread-running-sleep-de
 ![](./img/33528.jpg)
 
 #### 3.3.5.3 backend版本配置   
+<span id="3.3.5.3"></span>
+
 **功能概述**   
 由于不同的MySQL版本在使用时略有差异，而当前的DBProxy无法自动获取后台连接的DBProxy版本信息，因此在DBProxy中需要手动的配置后台所连接的MySQL的版本信息。该该本信息可以在DBProxy启动之前在配置文件中进行配置，也可以在DBProxy运行期间，通过admin端口提供的命令，对该参数进行动态配置，各配置方法接下来将一一阐述。    
 
@@ -1471,6 +1564,8 @@ show variables like 'mysql-version';
 ![](./img/33533.jpg)
 
 ### 3.3.6 日志管理   
+<span id="3.3.6"></span>
+
 **功能概述**   
 DBProxy记录的日志分为两类：DBProxy系统运行日志 和 sql 日志。DBProxy系统运行日志记录了DBProxy自身启动、停止、Admin端口对系统设置等操作的日志；而sql日志则记录了经由DBProxy处理的sql执行的情况的日志。    
 
@@ -1532,8 +1627,12 @@ set log-trace-modules = $int;
 ```
 
 ### 3.3.7 流量管理   
+<span id="3.3.7"></span>
+
 DBProxy支持流量管理。在该模块中，可以对某些查询语句做定向发放，也可以对某些语句进行过滤，详细介绍、配置和使用接下来将一一介绍。   
 #### 3.3.7.1 SQL 过滤   
+<span id="3.3.7.1"></span>
+
 **功能概述**  
 该功能可以设置Atla的过滤规则，通过sql语句与过滤规则进行匹配，可以对某些语句进行拦截。sql语句的过滤规则的生成有两种方式：1 手动配置黑名单 2 设置阈值，达到阈值自动添加。下面将详细对sql过滤的功能进行介绍。    
 
@@ -1570,7 +1669,7 @@ set manual-filter-flag=ON|OFF;     #设置手动添加的拦截语句是否某�
 
 当使用命令：show blacklists;语句时，显示的各个字段含义如下：   
 
-<table border="1" align="left" style="width : 100%;">
+<table  align="left" style="width : 100%;">
 <tr>
 	<th>字段名称</th>
 	<th>含义</th>
@@ -1709,6 +1808,8 @@ show lastest_queries
 ```
 
 #### 3.3.7.2 从库流量配置   
+<span id="3.3.7.2"></span>
+
 **功能概述**
 
 该功能可以通过hint功能指定某个用户的某次请求发送到指定的从库中去。  
@@ -1841,6 +1942,8 @@ remove user backends $username@$slave_tag[|$slave_tag]; #\删除用户username�
 ![](./img/337217.jpg)
 
 #### 3.3.7.3 主库流量配置   
+<span id="3.3.7.3"></span>
+
 可以指派某条语句发往主库，语法如下：   
 
 ```
@@ -1854,9 +1957,13 @@ remove user backends $username@$slave_tag[|$slave_tag]; #\删除用户username�
 ```
 
 ### 3.3.8 统计信息管理   
+<span id="3.3.8"></span>
+
 DBProxy提供了信息的统计功能。目前分为两类：1 统计语句执行的响应时间 2 在响应时间统计的基础上支持percentile功能，下面将详细介绍。   
 
 #### 3.3.8.1 响应时间统计   
+<span id="3.3.8.1"></span>
+
 **功能概述**  
 该功能是对sql语句的相应时间进行统计，其中包括对慢查询的统计。   
 
@@ -1899,6 +2006,8 @@ show query_response_time;
 ```
 
 #### 3.3.8.2 percentile   
+<span id="3.3.8.2"></span>
+
 **功能概述**    
 该功能允许用户查看最近X分钟（/小时）内，前百分之X的的响应时间（该功能与sysbench中的该功能一致）。   
 
@@ -1962,12 +2071,16 @@ show percentile [$latest_time];    #查看最近$latest_time时间内的响应�
 当然，可以使用set percentile来修改此时的百分比，查询不同百分比，最近不同时间段内的响应时间。   
 
 ### 3.3.9 监控管理   
+<span id="3.3.9"></span>
+
 DBProxy提供了丰富的状态查看端口，管理员可以登录admin端口对运行时各个参数、状态进行监控、管理。各类参数的查看、设置及使用方法，接下来将逐一介绍。   
 
 ####3.3.9.1 参数查看    
+<span id="3.3.9.1"></span>
+
 **功能概述**
 查询当前系统配置的参数信息，可查看的信息如下所示。  
-<table border="1" align="left" style="width : 100%;">
+<table  align="left" style="width : 100%;">
 <tr>
 	<th>Variable_name</th>
 	<th>含义</th>
@@ -2190,9 +2303,11 @@ show variables like '';
 ![](./img/33911.jpg)
 
 #### 3.3.9.2 状态查看  
+<span id="3.3.9.2"></span>
+
 **功能概述**      
 
-<table border="1" align="left" style="width : 100%;"> 
+<table  align="left" style="width : 100%;"> 
 <tr>
 	<th>Variable_name</th>
 	<th>含义</th>
@@ -2315,10 +2430,12 @@ show proxy status;
 ```
 
 #### 3.3.9.3 最近查询语句的查看  
+<span id="3.3.9.3"></span>
+
 **功能概述**  
 显示最近查询的语句的相关信息，其信息包含：   
 
-<table border="1" align="left" style="width : 100%;">
+<table  align="left" style="width : 100%;">
 <tr>
 	<th>名称</th>
 	<th>含义</th>
@@ -2349,12 +2466,26 @@ show proxy status;
 
 > show lastest_queries   
 
+#### 3.3.9.4 查询相应时间查看     
+<span id="3.3.9.4"></span>
+
+**功能概述**    
+
+用来显示历史记录的查询响应的时间。
+
+**使用方法**   
+
+> show query_response_time;    
+
+
 #### 3.3.9.5 事件等待状态查看   
+<span id="3.3.9.5"></span>
+
 **功能概述**           
 
 用来查询事件等待的状态，其信息包含：
 
-<table border="1" align="left" style="width : 100%;">
+<table  align="left" style="width : 100%;">
 <tr>
 	<th>名称</th>
 	<th>含义</th>
